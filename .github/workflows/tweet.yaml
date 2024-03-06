@@ -18,7 +18,7 @@ jobs:
           pip install pipenv
           pipenv install --system --categories "packages"
       - name: Start django server
-        run: python manage.py runserver
+        run: python manage.py runserver &
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -34,7 +34,7 @@ jobs:
         with:
           timeout_minutes: 1
           max_attempts: 5
-          command: curl -o /dev/null -s -w "%{http_code}\n" http://localhost:9000/ping/
+          command: curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8000/ping/
           on_retry_command: sleep 5
       - name: Run script
         run: python main.py
