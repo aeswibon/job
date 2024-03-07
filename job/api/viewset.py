@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from job.api.serializer import JobSerializer
-from job.constants import AUTH_URL, TEXT, TOKEN_URL
+from job.constants import AUTH_URL, TOKEN_URL
 from job.helper import generate_code_challenge, generate_code_verifier, make_token
 from job.models import Job
 
@@ -43,8 +43,7 @@ class JobViewset(viewsets.GenericViewSet):
         )
         if res.status_code != 201:
             raise Exception("Job not tweeted!!")
-        job.deleted = True
-        job.save(update_fields=["deleted"])
+        job.delete()
 
     @action(detail=False, methods=["post"])
     def home(self, request, *args, **kwargs):

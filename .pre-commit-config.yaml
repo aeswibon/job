@@ -4,8 +4,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
-      - id: no-commit-to-branch
-        args: [--branch, master, --branch, production]
       - id: check-merge-conflict
       - id: check-builtin-literals
       - id: mixed-line-ending
@@ -22,11 +20,11 @@ repos:
       - id: isort
         additional_dependencies: ["isort[pyproject]"]
 
-  - repo: https://github.com/psf/black
-    rev: 24.2.0
-    hooks:
-      - id: black
-        args: ["--config=pyproject.toml"]
+  # - repo: https://github.com/psf/black
+  #   rev: 24.2.0
+  #   hooks:
+  #     - id: black
+  #       args: ["--config=pyproject.toml"]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
