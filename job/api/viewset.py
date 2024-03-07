@@ -43,7 +43,8 @@ class JobViewset(viewsets.GenericViewSet):
         )
         if res.status_code != 201:
             raise Exception("Job not tweeted!!")
-        job.delete()
+        job.deleted = True
+        job.save()
 
     @action(detail=False, methods=["post"])
     def home(self, request, *args, **kwargs):
