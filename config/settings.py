@@ -27,7 +27,9 @@ if READ_DOT_ENV_FILE := env.bool("DJANGO_READ_DOT_ENV_FILE", default=False):
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-$f)b02ub#7u4w9u23=5=tu*jg=xcx=%$v-cvfrw@0_#ouz4w+0"
+SECRET_KEY = (
+    "django-insecure-$f)b02ub#7u4w9u23=5=tu*jg=xcx=%$v-cvfrw@0_#ouz4w+0"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,7 +95,7 @@ DATABASES = {
         "USER": env("POSTGRES_USER"),
         "PASSWORD": env("POSTGRES_PASSWORD"),
         "HOST": env("POSTGRES_HOST"),
-        "PORT": 5432,
+        "PORT": env("POSTGRES_PORT"),
     }
 }
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
