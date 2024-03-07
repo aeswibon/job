@@ -22,7 +22,7 @@ class JobViewset(viewsets.GenericViewSet):
     _code_verifier = generate_code_verifier()
     _code_challenge = generate_code_challenge(_code_verifier)
 
-    queryset = Job.objects.filter(deleted=False).order_by("-date")
+    queryset = Job.objects.filter(deleted=False).order_by("date")
     serializer_class = JobSerializer
 
     def __tweet(self, token):
@@ -44,7 +44,7 @@ class JobViewset(viewsets.GenericViewSet):
         if res.status_code != 201:
             raise Exception("Job not tweeted!!")
         job.deleted = True
-        job.save()
+        job.save(update_fields=["deleted"])
 
     @action(detail=False, methods=["post"])
     def home(self, request, *args, **kwargs):
