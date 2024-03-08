@@ -7,9 +7,7 @@ import aiohttp
 async def main():
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(
-                "http://localhost:9000/api/v1/refresh/"
-            ) as response:
+            async with session.get("http://localhost:9000/api/v1/refresh/") as response:
                 sleep(5)
                 if response.status == 200:
                     print("Success")

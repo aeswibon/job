@@ -7,8 +7,4 @@ exclude =
   *.pot,
   *.py[co],
   __pycache__,
-  .venv,
   */migrations/*,
-  */migrations_old/*,
-  */static/CACHE/*,
-  docs

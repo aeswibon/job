@@ -6,17 +6,13 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework.routers import SimpleRouter
 
-from job.api.viewset import JobViewset
-from job.views import ping
-
-router = SimpleRouter()
-router.register("", JobViewset, basename="job")
+from bot.job.views import ping
+from config import api_router
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include(router.urls)),
+    path("api/v1/", include(api_router.urlpatterns)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "swagger/",

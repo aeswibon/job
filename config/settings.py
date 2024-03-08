@@ -21,25 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 if READ_DOT_ENV_FILE := env.bool("DJANGO_READ_DOT_ENV_FILE", default=False):
     # OS environment variables take precedence over variables from .env
-    env.read_env(str(BASE_DIR / ".env"))
+    env.read_env(str(BASE_DIR / "docker/.env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-$f)b02ub#7u4w9u23=5=tu*jg=xcx=%$v-cvfrw@0_#ouz4w+0"
-)
+SECRET_KEY = "django-insecure-$f)b02ub#7u4w9u23=5=tu*jg=xcx=%$v-cvfrw@0_#ouz4w+0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,10 +43,19 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
-    "job",
+]
+
+THIRD_PARTY_APPS = [
     "drf_spectacular",
     "rest_framework",
 ]
+
+LOCAL_APPS = [
+    "bot.job",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
