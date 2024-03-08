@@ -1,12 +1,28 @@
-import requests
+import asyncio
+from time import sleep
+
+import aiohttp
 
 
-def main():
-    res = requests.get("http://localhost:8000/api/v1/refresh/")
-
-    if res.status_code == 200:
-        print("Success")
+async def main():
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "http://localhost:9000/api/v1/refresh/"
+            ) as response:
+                sleep(5)
+                if response.status == 200:
+                    print("Success")
+                else:
+                    response_text = await response.text()
+                    raise Exception(
+                        f"Job Failed with status {response.status}. Response: {response_text}"
+                    )
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
-    main()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(main())
